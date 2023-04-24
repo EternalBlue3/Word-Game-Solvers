@@ -14,6 +14,5 @@ Here are two links for the game Word Connect: https://play.google.com/store/apps
 To compile these programs use g++ or another compiler. 
 If you are using g++, run these commands:
 
-"g++ -O3 WordConnect.cpp -o WordConnectSolver"
-
-"./WordConnectSolver"
+- "g++ -O3 WordConnect.cpp -o WordConnectSolver"
+- "./WordConnectSolver"
