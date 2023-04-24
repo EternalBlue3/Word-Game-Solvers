@@ -11,5 +11,8 @@ The Word Connect solver is designed to solve a game on the app store called "Wor
 
 Here are two links for the game Word Connect: https://play.google.com/store/apps/details?id=com.wordgame.words.connect&hl=en_US&gl=US, https://apps.apple.com/us/app/word-connect-%C2%A4/id1226926872
 
-To compile these programs use g++ or another compiler. If you are using g++, run "g++ -O3 WordConnect.cpp -o WordConnectSolver"
-Then, run "./WordConnectSolver" to use the program.
+To compile these programs use g++ or another compiler. 
+If you are using g++, run these commands:
+
+"g++ -O3 WordConnect.cpp -o WordConnectSolver"
+"./WordConnectSolver"
