@@ -3,7 +3,7 @@
 This repository is a compilation of all of the word games I have solved thus far. I plan to solve many more in the future, including:
 
 - Wordle
-- Boggle
+- Word Searches
 - Scrabble
 
 The New York Times Spelling Bee game can be found here: https://www.nytimes.com/puzzles/spelling-bee
