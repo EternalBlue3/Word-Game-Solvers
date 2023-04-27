@@ -36,7 +36,7 @@ def search(path):
 
 def get_dictionary():
     stems, dictionary = set(), set()
-    with open('dictionary.txt') as f:
+    with open('wordlist.txt') as f:
         for word in f:
             word = word.strip().upper()
             dictionary.add(word)
