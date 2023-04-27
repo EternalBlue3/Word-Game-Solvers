@@ -28,14 +28,16 @@ def search(path):
             search(path + [next_pos])
 
 def get_dictionary():
-    stems, dictionary = set(), set()
+    stems, dictionary = {}, {}
     with open('wordlist.txt') as f:
         for word in f:
             word = word.strip().upper()
-            dictionary.add(word)
+            dictionary[word] = None
 
             for i in range(len(word)):
-                stems.add(word[:i + 1])
+                stem = word[:i + 1]
+                if stem not in stems:
+                    stems[stem] = None
 
     return dictionary, stems
 
