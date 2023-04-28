@@ -5,6 +5,7 @@ This repository is a compilation of all of the word games I have solved thus far
 - Wordle
 - Word Search (C++)
 - Scrabble
+- Boggle (C++)
 
 The New York Times Spelling Bee game can be found here: https://www.nytimes.com/puzzles/spelling-bee
 The Word Connect solver is designed to solve a game on the app store called "Word Connect." 
