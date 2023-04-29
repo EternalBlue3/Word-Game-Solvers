@@ -38,7 +38,14 @@ def solve(gameboard,words):
 
 def main():
     coordinates = solve(gameboard,words)
-    print(" "*4,' '.join([str(x) for x in range(len(gameboard))]))
+
+    max_word_length = max(len(coord[0]) for coord in coordinates)
+    for index, coord in enumerate(coordinates):
+        word, x1, y1, x2, y2 = coord
+        spaces = " " * (max_word_length - len(word) + 1)
+        print(f"\"{word}\" found at: {spaces}({x1},{y1}) to ({x2},{y2})")
+    
+    print("\n"," "*4,' '.join([str(x) for x in range(len(gameboard))]))
 
     # Print board with solved words
     for indexX, x in enumerate(gameboard):
