@@ -38,6 +38,7 @@ def solve(gameboard,words):
 
 def main():
     coordinates = solve(gameboard,words)
+    print(" "*4,' '.join([str(x) for x in range(len(gameboard))]))
 
     # Print board with solved words
     for indexX, x in enumerate(gameboard):
@@ -51,7 +52,7 @@ def main():
                 modded.append(f"{BOLD}{y}{END}")
             else:
                 modded.append(y)
-        print(''.join(modded))
+        print(f"{indexX:<5}{' '.join(modded)}")
         
 if __name__ == '__main__':
     main()
