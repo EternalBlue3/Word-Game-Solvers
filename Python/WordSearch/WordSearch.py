@@ -1,60 +1,56 @@
 END = '\033[0m'
-BOLD = '\033[1m'
+BOLD = '\033[31m'
 
-with open('game.txt','r') as fh:
-    gameboard = [row.strip().lower() for row in fh.readlines()]
+def read_gameboard():
+    with open('game.txt', 'r') as f:
+        gameboard = [row.strip().lower() for row in f.readlines()]
+    return gameboard
 
-def check_horizontal_vertical(positions, vertical, word):
-    for index, x in enumerate(positions):
-        reversed_ = x[::-1]
-        if word in x:
-            index_y = x.index(word)
-            if vertical:
-                return True, (word,index,index_y,index,index_y+len(word)-1)
-            else:
-                return True, (word,index_y,index,index_y+len(word)-1,index)
-        elif word in reversed_:
-            index_y = reversed_.index(word)
-            if vertical:
-                return True, (word,index,index_y,index,index_y+len(word)-1)
-            else:
-                return True, (word,index_y,index,index_y,index_y+len(word)-1)
-    return [False]
+def check_horizontal_vertical(gameboard, word):
+    for i, row in enumerate(gameboard):
+        if word in row:
+            j = row.index(word)
+            return True, (word, i, j, i, j + len(word) - 1)
+        
+    for j in range(len(gameboard[0])):
+        column = ''.join(row[j] for row in gameboard)
+        if word in column:
+            i = column.index(word)
+            return True, (word, i, j, i + len(word) - 1, j)
+        
+    return False, None
 
-def solve(gameboard,word):
-    horizontal = check_horizontal_vertical(gameboard,False,word)
-    if horizontal[0] is True:
-        return horizontal[1]
-    else:
-        vertical_board = [''.join(col) for col in zip(*gameboard)]
-        vertical = check_horizontal_vertical(vertical_board,True,word)
-        if vertical[0] is True:
-            return vertical[1]
+def solve(gameboard, word):
+    found, coords = check_horizontal_vertical(gameboard, word)
+    if found:
+        return coords
     return None
 
 def main():
+    gameboard = read_gameboard()
     
+    print('Enter words to find or type "exit" to quit.')
     while True:
-        word = input("Enter word to find: ")
-        coordinates = solve(gameboard,word)
+        word = input('Enter word: ').strip().lower()
+        if word == 'exit':
+            break
         
-        if coordinates == None:
-            print("Couldn't find word. Enter another.\n")
-        else:
-            word,x1,y1,x2,y2 = coordinates
-            print(f"\n\"{word}\" found at: ({x1},{y1}) to ({x2},{y2})")
-            print("\n"," "*4,' '.join([str(x) for x in range(len(gameboard))]))
+        coords = solve(gameboard, word)
+        if coords is None:
+            print(f'"{word}" not found.\n')
+            continue
+        
+        print(f'\n"{word}" found at: ({coords[1]},{coords[2]}) to ({coords[3]},{coords[4]})\n')
+        print('   ' + ' '.join(str(i % 10) for i in range(len(gameboard))))
+        for i, row in enumerate(gameboard):
+            line = f'{i:>2} '
+            for j, letter in enumerate(row):
+                if coords[1] <= i <= coords[3] and coords[2] <= j <= coords[4]:
+                    line += f'{BOLD}{letter}{END} '
+                else:
+                    line += f'{letter} '
+            print(line)
+        print()
 
-            # Print board with solved words
-            for indexX, x in enumerate(gameboard):
-                modded = []
-                for indexY, y in enumerate(x):
-                    if coordinates[1] <= indexY <= coordinates[3] and coordinates[2] <= indexX <= coordinates[4]:
-                        modded.append(f"{BOLD}{y}{END}")
-                    else:
-                        modded.append(y)
-                print(f"{indexX:<5}{' '.join(modded)}")
-            print()
-        
 if __name__ == '__main__':
     main()
