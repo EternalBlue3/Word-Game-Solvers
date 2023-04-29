@@ -1,65 +1,60 @@
-import time
-start = time.time()
-
 END = '\033[0m'
 BOLD = '\033[1m'
 
 with open('game.txt','r') as fh:
     gameboard = [row.strip().lower() for row in fh.readlines()]
-    
-with open('words.txt','r') as fh:
-    words = [word.strip().lower() for word in fh.readlines()]
 
-def check_horizontal_vertical(positions, vertical):
-    found = []
+def check_horizontal_vertical(positions, vertical, word):
     for index, x in enumerate(positions):
-        for y in words:
-            reversed_ = x[::-1]
-            if y in x:
-                index_y = x.index(y)
-                if vertical:
-                    found.extend([(y,index,index_y,index,index_y+len(y)-1)])
-                else:
-                    found.extend([(y,index_y,index,index_y+len(y)-1,index)])
-            elif y in reversed_:
-                index_y = reversed_.index(y)
-                if vertical:
-                    found.extend([(y,index,index_y,index,index_y+len(y)-1)])
-                else:
-                    found.extend([(y,index_y,index,index_y,index_y+len(y)-1)])
-    return found
+        reversed_ = x[::-1]
+        if word in x:
+            index_y = x.index(word)
+            if vertical:
+                return True, (word,index,index_y,index,index_y+len(word)-1)
+            else:
+                return True, (word,index_y,index,index_y+len(word)-1,index)
+        elif word in reversed_:
+            index_y = reversed_.index(word)
+            if vertical:
+                return True, (word,index,index_y,index,index_y+len(word)-1)
+            else:
+                return True, (word,index_y,index,index_y,index_y+len(word)-1)
+    return [False]
 
-def solve(gameboard,words):
-    found = []
-    vertical = [''.join(col) for col in zip(*gameboard)]
-    found.extend(check_horizontal_vertical(gameboard,False))
-    found.extend(check_horizontal_vertical(vertical,True))
-    return found
+def solve(gameboard,word):
+    horizontal = check_horizontal_vertical(gameboard,False,word)
+    if horizontal[0] is True:
+        return horizontal[1]
+    else:
+        vertical_board = [''.join(col) for col in zip(*gameboard)]
+        vertical = check_horizontal_vertical(vertical_board,True,word)
+        if vertical[0] is True:
+            return vertical[1]
+    return None
 
 def main():
-    coordinates = solve(gameboard,words)
-
-    max_word_length = max(len(coord[0]) for coord in coordinates)
-    for index, coord in enumerate(coordinates):
-        word, x1, y1, x2, y2 = coord
-        spaces = " " * (max_word_length - len(word) + 1)
-        print(f"\"{word}\" found at: {spaces}({x1},{y1}) to ({x2},{y2})")
     
-    print("\n"," "*4,' '.join([str(x) for x in range(len(gameboard))]))
+    while True:
+        word = input("Enter word to find: ")
+        coordinates = solve(gameboard,word)
+        
+        if coordinates == None:
+            print("Couldn't find word. Enter another.\n")
+        else:
+            word,x1,y1,x2,y2 = coordinates
+            print(f"\n\"{word}\" found at: ({x1},{y1}) to ({x2},{y2})")
+            print("\n"," "*4,' '.join([str(x) for x in range(len(gameboard))]))
 
-    # Print board with solved words
-    for indexX, x in enumerate(gameboard):
-        modded = []
-        for indexY, y in enumerate(x):
-            incoords = False
-            for coords in coordinates:
-                if coords[1] <= indexY <= coords[3] and coords[2] <= indexX <= coords[4]:
-                    incoords = True
-            if incoords:
-                modded.append(f"{BOLD}{y}{END}")
-            else:
-                modded.append(y)
-        print(f"{indexX:<5}{' '.join(modded)}")
+            # Print board with solved words
+            for indexX, x in enumerate(gameboard):
+                modded = []
+                for indexY, y in enumerate(x):
+                    if coordinates[1] <= indexY <= coordinates[3] and coordinates[2] <= indexX <= coordinates[4]:
+                        modded.append(f"{BOLD}{y}{END}")
+                    else:
+                        modded.append(y)
+                print(f"{indexX:<5}{' '.join(modded)}")
+            print()
         
 if __name__ == '__main__':
     main()
