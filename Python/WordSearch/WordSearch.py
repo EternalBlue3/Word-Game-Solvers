@@ -1,10 +1,16 @@
+import sys
+
 END = '\033[0m'
 BOLD = '\033[31m'
 
 def read_gameboard():
-    with open('game.txt', 'r') as f:
-        gameboard = [row.strip().lower() for row in f.readlines()]
-    return gameboard
+    try:
+        with open('game.txt', 'r') as f:
+            gameboard = [row.strip().lower() for row in f.readlines()]
+        return gameboard
+    except FileNotFoundError:
+        print("Could not find the game file. Please create a file called \"game.txt\" in the same directory as this solver.")
+        sys.exit(1)
 
 def check_horizontal_vertical(gameboard, word):
     for i, row in enumerate(gameboard):
