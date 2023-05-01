@@ -33,14 +33,8 @@ def check_diagonals(gameboard, word):
         if word in x[0] or word in x[0][::-1]:
             i = x[1]
             index = x[0].index(word) if word in x[0] else x[0].index(word[::-1])
-            
-            if i < 0:
-                x,y = -i+index,index
-            elif i > 0:
-                x,y = index,i+index
-            else:
-                x,y = index,index
-            
+            x,y = (-i+index,index) if i<0 else (index,i+index)
+
             indices = [(x,y)]
             for i in range(len(word)-1):
                 x += 1
@@ -54,14 +48,8 @@ def check_diagonals(gameboard, word):
             i = x[1]
             gameboard_length = len(gameboard)-1
             index = x[0].index(word) if word in x[0] else x[0].index(word[::-1])
-                        
-            if i < 0:
-                x,y = gameboard_length-index, -i+index
-            elif i > 0:
-                x,y = gameboard_length-(i + index), index
-            else:
-                x,y = gameboard_length-index,index
-            
+            x,y = (gameboard_length-index,-i+index) if i<0 else (gameboard_length-(i + index),index)
+
             indices = [(x,y)]
             for i in range(len(word)-1):
                 x -= 1
