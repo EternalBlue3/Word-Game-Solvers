@@ -10,47 +10,117 @@ def check_horizontal_vertical(gameboard, word):
     for i, row in enumerate(gameboard):
         if word in row:
             j = row.index(word)
-            return True, (word, i, j, i, j + len(word) - 1)
+            return True, (i, j, i, j + len(word) - 1)
         
     for j in range(len(gameboard[0])):
         column = ''.join(row[j] for row in gameboard)
         if word in column:
             i = column.index(word)
-            return True, (word, i, j, i + len(word) - 1, j)
+            return True, (i, j, i + len(word) - 1, j)
         
     return False, None
 
-def solve(gameboard, word):
-    found, coords = check_horizontal_vertical(gameboard, word)
-    if found:
-        return coords
-    return None
+def check_diagonals(gameboard, word):
+    diagonals = []
+    opposite_diagonals = []
+    for i in range(-len(gameboard)+1, len(gameboard)):
+        diagonal = [gameboard[x][y] for x in range(len(gameboard)) for y in range(len(gameboard)) if x - y == i]
+        diagonals.append((''.join(diagonal), i))
+        diagonal = [gameboard[x][y] for x in range(len(gameboard)) for y in range(len(gameboard)) if (len(gameboard)-1-x) - y == i]
+        opposite_diagonals.append((''.join(diagonal), i))
+
+    
+    for x in diagonals:
+        if word in x[0]:
+            indices = []
+            i = x[1]
+            index = x[0].index(word)
+            
+            if i < 0:
+                x,y = -i+index,index
+            elif i > 0:
+                x,y = index,i+index
+            else:
+                x,y = index,index
+            
+            indices.append((x,y))
+            for i in range(len(word)-1):
+                x += 1
+                y += 1
+                indices.append((x,y))
+            
+            return True, indices
+    
+    
+    for x in opposite_diagonals:
+        if word in x[0]:
+            indices = []
+            i = x[1]
+            index = x[0].index(word)
+            
+            if i < 0:
+                x,y = len(gameboard)-1-index, -i + index
+            elif i > 0:
+                x,y = len(gameboard)-1-(i + index), index
+            else:
+                x,y = len(gameboard)-1-index,index
+            
+            indices.append((x,y))
+            for i in range(len(word)-1):
+                x -= 1
+                y += 1
+                indices.append((x,y))
+            
+            return True, indices
+    
+    return False, None
 
 def main():
     gameboard = read_gameboard()
-    
+
     print('Enter words to find or type "exit" to quit.')
     while True:
         word = input('Enter word: ').strip().lower()
         if word == 'exit':
             break
-        
-        coords = solve(gameboard, word)
+
+        diagonal = False
+        found, coords = check_horizontal_vertical(gameboard, word)
+        if not found:
+            diagonal = True
+            found, coords = check_diagonals(gameboard, word)
+
         if coords is None:
             print(f'"{word}" not found.\n')
             continue
-        
-        print(f'\n"{word}" found at: ({coords[1]},{coords[2]}) to ({coords[3]},{coords[4]})\n')
-        print('   ' + ' '.join(str(i % 10) for i in range(len(gameboard))))
-        for i, row in enumerate(gameboard):
-            line = f'{i:>2} '
-            for j, letter in enumerate(row):
-                if coords[1] <= i <= coords[3] and coords[2] <= j <= coords[4]:
-                    line += f'{BOLD}{letter}{END} '
-                else:
-                    line += f'{letter} '
-            print(line)
-        print()
+
+        if diagonal:
+            print(f'\n"{word}" found at coords: {coords}\n')
+            print('   ' + ' '.join(str(i % 10) for i in range(len(gameboard))))
+            
+            for i, row in enumerate(gameboard):
+                line = f'{i:>2} '
+                for j, letter in enumerate(row):
+                    if any((j,i) == coord for coord in coords):
+                        line += f'{BOLD}{letter}{END} '
+                    else:
+                        line += f'{letter} '
+                print(line)
+            print()
+            
+        else:
+            print(f'\n"{word}" found at: ({coords[0]},{coords[1]}) to ({coords[2]},{coords[3]})\n')
+            print('   ' + ' '.join(str(i % 10) for i in range(len(gameboard))))
+
+            for i, row in enumerate(gameboard):
+                line = f'{i:>2} '
+                for j, letter in enumerate(row):
+                    if coords[0] <= i <= coords[2] and coords[1] <= j <= coords[3]:
+                        line += f'{BOLD}{letter}{END} '
+                    else:
+                        line += f'{letter} '
+                print(line)
+            print()
 
 if __name__ == '__main__':
     main()
