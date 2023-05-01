@@ -24,17 +24,15 @@ def check_diagonals(gameboard, word):
     diagonals = []
     opposite_diagonals = []
     for i in range(-len(gameboard)+1, len(gameboard)):
-        diagonal = [gameboard[x][y] for x in range(len(gameboard)) for y in range(len(gameboard)) if x - y == i]
-        diagonals.append((''.join(diagonal), i))
-        diagonal = [gameboard[x][y] for x in range(len(gameboard)) for y in range(len(gameboard)) if (len(gameboard)-1-x) - y == i]
-        opposite_diagonals.append((''.join(diagonal), i))
-
+        diagonal = ''.join([gameboard[x][y] for x in range(len(gameboard)) for y in range(len(gameboard)) if x - y == i])
+        diagonals.append((diagonal, i))
+        diagonal = ''.join([gameboard[x][y] for x in range(len(gameboard)) for y in range(len(gameboard)) if (len(gameboard)-1-x) - y == i])
+        opposite_diagonals.append((diagonal, i))
     
     for x in diagonals:
-        if word in x[0]:
-            indices = []
+        if word in x[0] or word in x[0][::-1]:
             i = x[1]
-            index = x[0].index(word)
+            index = x[0].index(word) if word in x[0] else x[0].index(word[::-1])
             
             if i < 0:
                 x,y = -i+index,index
@@ -43,7 +41,7 @@ def check_diagonals(gameboard, word):
             else:
                 x,y = index,index
             
-            indices.append((x,y))
+            indices = [(x,y)]
             for i in range(len(word)-1):
                 x += 1
                 y += 1
@@ -51,21 +49,20 @@ def check_diagonals(gameboard, word):
             
             return True, indices
     
-    
     for x in opposite_diagonals:
-        if word in x[0]:
-            indices = []
+        if word in x[0] or word in x[0][::-1]:
             i = x[1]
-            index = x[0].index(word)
-            
+            gameboard_length = len(gameboard)-1
+            index = x[0].index(word) if word in x[0] else x[0].index(word[::-1])
+                        
             if i < 0:
-                x,y = len(gameboard)-1-index, -i + index
+                x,y = gameboard_length-index, -i+index
             elif i > 0:
-                x,y = len(gameboard)-1-(i + index), index
+                x,y = gameboard_length-(i + index), index
             else:
-                x,y = len(gameboard)-1-index,index
+                x,y = gameboard_length-index,index
             
-            indices.append((x,y))
+            indices = [(x,y)]
             for i in range(len(word)-1):
                 x -= 1
                 y += 1
