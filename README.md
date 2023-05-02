@@ -2,6 +2,11 @@
 
 This repository is a compilation of all of the word games I have solved thus far. Here are the games I have solved:
 
+- The New York Times Spelling Bee
+- Word Connect
+- Boggle
+- Hangman
+- Word Search
 
 Here are some coming games or improvements:
 
