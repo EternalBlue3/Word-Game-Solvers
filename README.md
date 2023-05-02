@@ -1,24 +1,26 @@
 # Word-Game-Solvers
 
-This repository is a compilation of all of the word games I have solved thus far. I plan to solve many more in the future, including:
+This repository is a compilation of all of the word games I have solved thus far. Here are the games I have solved:
 
-- Wordle
-- Word Search (C++)
-- Scrabble
+
+Here are some coming games or improvements:
+
+- Wordle (Python and C++)
+- Word Search (C++) (The solver can't find words on diagonals yet)
+- Scrabble (Python and C++)
 - Boggle (C++)
 
-The New York Times Spelling Bee game can be found here: https://www.nytimes.com/puzzles/spelling-bee
-The Word Connect solver is designed to solve a game on the app store called "Word Connect." 
+Links to games:
 
-Here are two links for the game Word Connect: https://play.google.com/store/apps/details?id=com.wordgame.words.connect&hl=en_US&gl=US, https://apps.apple.com/us/app/word-connect-%C2%A4/id1226926872
+    The New York Times Spelling Bee game can be found here: https://www.nytimes.com/puzzles/spelling-bee
 
-Here is a link to an online Hangman game: https://www.coolmathgames.com/0-hangman
+    Here are two links for the game Word Connect: https://play.google.com/store/apps/details?id=com.wordgame.words.connect&hl=en_US&gl=US, https://apps.apple.com/us/app/word-connect-%C2%A4/id1226926872
 
-Here is a link to Boggle on the app store: https://apps.apple.com/us/app/boggle-with-friends-word-game/id1197041040
+    Here is a link to an online Hangman game: https://www.coolmathgames.com/0-hangman
 
-Here is a link to some printable word searches: https://www.brainzilla.com/word-games/word-search/printable/
+    Here is a link to Boggle on the app store: https://apps.apple.com/us/app/boggle-with-friends-word-game/id1197041040
 
-
+    Here is a link to some printable word searches: https://www.brainzilla.com/word-games/word-search/printable/
 
 Word Search Solver:
 
