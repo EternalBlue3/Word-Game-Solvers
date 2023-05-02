@@ -14,14 +14,14 @@ def read_gameboard():
 
 def check_horizontal_vertical(gameboard, word):
     for i, row in enumerate(gameboard):
-        if word in row:
-            j = row.index(word)
+        if word in row or word[::-1] in row:
+            j = row.index(word) if word in row else row.index(word[::-1])
             return True, (i, j, i, j + len(word) - 1)
         
     for j in range(len(gameboard[0])):
         column = ''.join(row[j] for row in gameboard)
-        if word in column:
-            i = column.index(word)
+        if word in column or word[::-1] in column:
+            i = column.index(word) if word in column else column.index(word[::-1])
             return True, (i, j, i + len(word) - 1, j)
         
     return False, None
