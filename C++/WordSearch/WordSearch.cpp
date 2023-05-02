@@ -62,6 +62,30 @@ std::pair<bool, tuple<int, int, int, int>> check_horizontal_vertical(std::vector
     return std::make_pair(false, make_tuple(0, 0, 0, 0));
 }
 
+void print_board(vector<string>& gameboard, vector<int>& coords, string& word) {
+    const string RED = "\033[31m";  // red text color
+    const string END = "\033[0m";     // end color
+    
+    cout << "\n\"" << word << "\" found at: (" << coords[0] << "," << coords[1] << ") to (" << coords[2] << "," << coords[3] << ")\n";
+    cout << "   ";
+    for (int i = 0; i < gameboard[0].size(); i++) {
+        cout << i % 10 << " ";
+    }
+    cout << endl;
+    for (int i = 0; i < gameboard.size(); i++) {
+        cout << i << "  ";
+        for (int j = 0; j < gameboard[i].size(); j++) {
+            if (coords[0] <= i && i <= coords[2] && coords[1] <= j && j <= coords[3]) {
+                cout << RED << gameboard[i][j] << END << " ";
+            } else {
+                cout << gameboard[i][j] << " ";
+            }
+        }
+        cout << endl;
+    }
+    cout << endl;
+}
+
 int main() {
   vector<string> gameboard = read_gameboard();
   string word;
@@ -78,7 +102,8 @@ int main() {
       
       std::pair<bool, tuple<int, int, int, int>> output = check_horizontal_vertical(gameboard,word);
       if (output.first) {
-          cout << "x: " << std::get<0>(output.second) << "  y: " << std::get<1>(output.second) << endl;
+          vector<int> coordinates{std::get<0>(output.second),std::get<1>(output.second),std::get<2>(output.second),std::get<3>(output.second)};
+          print_board(gameboard,coordinates,word);
       } else {
           cout << "Word not found." << endl;
       }
