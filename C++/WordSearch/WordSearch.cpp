@@ -40,7 +40,7 @@ std::pair<bool, tuple<int, int, int, int>> check_horizontal_vertical(std::vector
             return std::make_pair(true, make_tuple(i, j, i, j + word.length() - 1));
         } else if (gameboard[i].find(std::string(word.rbegin(), word.rend())) != std::string::npos) {
             int j = gameboard[i].find(std::string(word.rbegin(), word.rend()));
-            return std::make_pair(true, make_tuple(i, j + word.length() - 1, i, j));
+            return std::make_pair(true, make_tuple(i, j, i, j + word.length() - 1));
         }
     }
 
@@ -55,7 +55,7 @@ std::pair<bool, tuple<int, int, int, int>> check_horizontal_vertical(std::vector
             return std::make_pair(true, make_tuple(i, j, i + word.length() - 1, j));
         } else if (column.find(std::string(word.rbegin(), word.rend())) != std::string::npos) {
             int i = column.find(std::string(word.rbegin(), word.rend()));
-            return std::make_pair(true, make_tuple(i + word.length() - 1, j, i, j));
+            return std::make_pair(true, make_tuple(i, j, i + word.length() - 1, j));
         }
     }
 
@@ -105,7 +105,7 @@ int main() {
           vector<int> coordinates{std::get<0>(output.second),std::get<1>(output.second),std::get<2>(output.second),std::get<3>(output.second)};
           print_board(gameboard,coordinates,word);
       } else {
-          cout << "Word not found." << endl;
+          cout << "Word not found." << "\n\n";
       }
   }
 
