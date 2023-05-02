@@ -12,15 +12,15 @@ Here are some coming games or improvements:
 
 Links to games:
 
-    The New York Times Spelling Bee game can be found here: https://www.nytimes.com/puzzles/spelling-bee
+- The New York Times Spelling Bee game can be found here: https://www.nytimes.com/puzzles/spelling-bee
 
-    Here are two links for the game Word Connect: https://play.google.com/store/apps/details?id=com.wordgame.words.connect&hl=en_US&gl=US, https://apps.apple.com/us/app/word-connect-%C2%A4/id1226926872
+- Here are two links for the game Word Connect: https://play.google.com/store/apps/details?id=com.wordgame.words.connect&hl=en_US&gl=US, https://apps.apple.com/us/app/word-connect-%C2%A4/id1226926872
 
-    Here is a link to an online Hangman game: https://www.coolmathgames.com/0-hangman
+- Here is a link to an online Hangman game: https://www.coolmathgames.com/0-hangman
 
-    Here is a link to Boggle on the app store: https://apps.apple.com/us/app/boggle-with-friends-word-game/id1197041040
+- Here is a link to Boggle on the app store: https://apps.apple.com/us/app/boggle-with-friends-word-game/id1197041040
 
-    Here is a link to some printable word searches: https://www.brainzilla.com/word-games/word-search/printable/
+- Here is a link to some printable word searches: https://www.brainzilla.com/word-games/word-search/printable/
 
 Word Search Solver:
 
