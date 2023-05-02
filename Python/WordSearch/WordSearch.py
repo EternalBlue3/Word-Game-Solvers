@@ -1,7 +1,7 @@
 import sys
 
 END = '\033[0m'
-BOLD = '\033[31m'
+RED = '\033[31m'
 
 def read_gameboard():
     try:
@@ -93,7 +93,7 @@ def main():
                 line = f'{i:>2} '
                 for j, letter in enumerate(row):
                     if any((j,i) == coord for coord in coords):
-                        line += f'{BOLD}{letter}{END} '
+                        line += f'{RED}{letter}{END} '
                     else:
                         line += f'{letter} '
                 print(line)
@@ -107,7 +107,7 @@ def main():
                 line = f'{i:>2} '
                 for j, letter in enumerate(row):
                     if coords[0] <= i <= coords[2] and coords[1] <= j <= coords[3]:
-                        line += f'{BOLD}{letter}{END} '
+                        line += f'{RED}{letter}{END} '
                     else:
                         line += f'{letter} '
                 print(line)
