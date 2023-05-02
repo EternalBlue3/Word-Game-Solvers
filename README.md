@@ -26,33 +26,33 @@ Word Search Solver:
 
 Here are some words you can try to find yourself, or with the solver:
 
-Art
-English
-Language
-Reading
-Springbreak
-Basketball
-Friends
-Library
-Recess
-Studying
-Bell
-Geograph
-Lunch
-School
-Teachers
-Bus
-Gym
-Mathematics
-Science
-Terms
-Dances
-History
-Music
-Soccer
-Volleyball
-Detention
-Homework
-Principal
-Socialstudies
-Waterfountain
+- Art
+- English
+- Language
+- Reading
+- Springbreak
+- Basketball
+- Friends
+- Library
+- Recess
+- Studying
+- Bell
+- Geograph
+- Lunch
+- School
+- Teachers
+- Bus
+- Gym
+- Mathematics
+- Science
+- Terms
+- Dances
+- History
+- Music
+- Soccer
+- Volleyball
+- Detention
+- Homework
+- Principal
+- Socialstudies
+- Waterfountain
