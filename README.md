@@ -11,7 +11,6 @@ This repository is a compilation of all of the word games I have solved thus far
 Here are some coming games or improvements:
 
 - Wordle (Python and C++)
-- Word Search (C++) (The solver can't find words on diagonals yet)
 - Scrabble (Python and C++)
 - Boggle (C++)
 
